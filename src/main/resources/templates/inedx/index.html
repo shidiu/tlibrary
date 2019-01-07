@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>首页</title>
+	<link rel="stylesheet" type="text/css" href="../js/easyui/themes/gray/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../js/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../js/easyui/demo/demo.css">
+	<script type="text/javascript" src="../js/easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../js//esayui/locale/easyui-lang-zh_CN.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="../css/verify.css" />
+	<script type="text/javascript" src="../js/index/verify.js"></script>
+	<script type="text/javascript" src="../js/index/index.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/demo.css" />
+	<link rel="stylesheet" type="text/css" href="../css/login.css" />
+
+	<script>
+        $(function(){
+
+            $(".i-text").focus(function(){
+                $(this).addClass('h-light');
+            });
+
+            $(".i-text").focusout(function(){
+                $(this).removeClass('h-light');
+            });
+
+            $("#username").focus(function(){
+                var username = $(this).val();
+                if(username=='输入账号'){
+                    $(this).val('');
+                }
+            });
+
+            $("#username").focusout(function(){
+                var username = $(this).val();
+                if(username==''){
+                    $(this).val('输入账号');
+                }
+            });
+
+
+            $("#password").focus(function(){
+                var username = $(this).val();
+                if(username=='输入密码'){
+                    $(this).val('');
+                }
+            });
+        });
+	</script>
+
+</head>
+
+<body>
+<div class="header">
+	<h1 class="headerLogo"><a title="题库管理系统" target="_blank" href="#"><img alt="题库管理系统" ></a></h1>
+</div>
+<div class="banner" >
+	<div class="login-aside" >
+		<div id="o-box-up"></div>
+		<div id="o-box-down" style="table-layout:fixed;">
+
+
+
+			<form class="login-form" method="post" action="login" id="login-form">
+				<div class="fm-item">
+					<label for="logonId" class="form-label">系统登陆：<span id="usernameerro" style="color: red;" th:text="${loginmsg}"></span></label>
+					<input type="text" value="输入账号" maxlength="100" id="username" class="i-text" name="username">
+					<div class="ui-form-explain"></div>
+				</div>
+
+				<div class="fm-item">
+					<label for="logonId" class="form-label">登陆密码：<span id="passworderro"  style="color: red;"></span></label>
+					<input type="password" value="" maxlength="100" id="password" class="i-text" name="password">
+					<div class="ui-form-explain"></div>
+				</div>
+
+				<div class="fm-item pos-r">
+					<label for="logonId" class="form-label">验证码</label>
+					<div id="yanzheng">
+						<div id="mpanel3" style="margin-top: 20px">
+						</div>
+						<button type="button" id="check-btn2" class="verify-btn">确定</button>
+					</div>
+				</div>
+
+			</form>
+
+		</div>
+	</div>
+</div>
+
+<div class="banner-shadow"></div>
+
+<div class="footer">
+	<p>Copyright &copy; 2014.Company name WCC All rights reserved.
+	</p>
+</div>
+</body>
+
+</html>

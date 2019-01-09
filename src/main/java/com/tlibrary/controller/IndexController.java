@@ -49,7 +49,7 @@ public class IndexController {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         User user = new User();
-        user.setUsername(username);
+        user.setAccountid(username);
         user.setPassword(password);
         String msg=null;
         try {

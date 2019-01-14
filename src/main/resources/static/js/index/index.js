@@ -38,4 +38,6 @@ function login(){
     }
     var form = document.getElementById("login-form");
     form.submit();
+    var username=$("#username").val("");
+    var password=$("#password").val("");
 }

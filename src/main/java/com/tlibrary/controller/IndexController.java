@@ -64,15 +64,14 @@ public class IndexController {
             request.setAttribute("loginmsg", "未找到登陆信息");
             e.printStackTrace();
         }
-
         if (msg == null) {
             modelAndView.setViewName("inedx/index.html");
         } else if (msg.equals("0")) {
                 modelAndView.setViewName("redirect:/toAdministrators");
         } else if (msg.equals("1")) {
-            modelAndView.setViewName("redirect:/teacher/teacher.html");
+            modelAndView.setViewName("redirect:toTeacher");
         } else if (msg.equals("2")) {
-            modelAndView.setViewName("redirect:/student/student.html");
+            modelAndView.setViewName("redirect:toStudent");
         } else {
             modelAndView.setViewName("redirect:/err/err.html");
         }
@@ -80,6 +79,14 @@ public class IndexController {
         return  modelAndView;
     }
 
+    @RequestMapping("/toTeacher")
+    public String toTeacher(){
+        return "/teacher/teacher.html";
+    }
+    @RequestMapping("/toStudent")
+    public String toStudent(){
+        return "/student/student.html";
+    }
     @RequestMapping("/toAdministrators")
     public String toAdministrators(){
         return "/administrators/administrators.html";

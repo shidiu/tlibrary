@@ -43,6 +43,7 @@ function user_add_save(){
             if(data=="添加成功"){
                 $.messager.alert("消息","添加成功！");
                 $("#user_add").window('close');
+                find();
             }else {
                 $.messager.alert("消息","添加失败！");
 			}
@@ -132,6 +133,7 @@ function deluser(){
             data : {datas:JSON.stringify(array)},
             success : function(data) {
                 $.messager.alert("消息",data);
+                find();
             }
         });
 

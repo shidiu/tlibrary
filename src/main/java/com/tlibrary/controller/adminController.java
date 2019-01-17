@@ -9,11 +9,14 @@ import com.tlibrary.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +29,8 @@ import java.util.Map;
 @RequestMapping("/admin")
 public class adminController {
 
+    @Autowired
+    private importController importController;
     @Autowired
     private AdminService as;
     @RequestMapping("/find")
@@ -76,6 +81,22 @@ public class adminController {
             return "删除成功";
         }
 
+    }
+
+    /**
+     * 批量新增用户
+     * @param file
+     * @param response
+     */
+    @RequestMapping("/addeUsers")
+    public @ResponseBody
+    void addeUsers(@RequestParam(value="exceladd") MultipartFile file, HttpServletResponse response,HttpServletRequest request){
+
+        Map map=new HashMap<>();
+
+        Gson gson = new Gson();
+        String json = gson.toJson(map);
+        ResponseUtil.toHtml(response, json);
     }
 
 }

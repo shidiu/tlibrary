@@ -25,6 +25,7 @@
 			<div id="" class="easyui-accordion" style="width: 100%;background-image: url(static/img/menubg.gif);">
 				<div title="用户管理" style="overflow:auto;padding:10px;">
 					<a onclick="add_user()" class="easyui-linkbutton" style="width: 100%;">账号新增</a>
+					<a onclick="addexcel_user()" class="easyui-linkbutton" style="width: 100%;">批量新增</a>
 				</div>
 
 				<div title="题库管理" style="overflow:auto;padding:10px;">
@@ -78,7 +79,7 @@
 							</div>
 
 							<!-- 隐藏弹窗 -->
-							<div id="user_add" closed="true" class="easyui-window" title="行业分类设置新增" style="width:790px;height:300px;display: none;" data-options="modal:true">
+							<div id="user_add" closed="true" class="easyui-window" title="新增" style="width:790px;height:300px;display: none;" data-options="modal:true">
 
 								<table style="margin-top: 25px;margin-left: 25px;font-size: 12px;text-align: center;">
 									<tr height="10px"></tr>
@@ -125,7 +126,29 @@
 									</tr>
 								</table>
 							</div>
-						</div>
+
+							<div id="addexcel_user" closed="true" class="easyui-window" title="批量新增" style="width:490px;height:160px;display: none;" data-options="modal:true">
+								<div>
+									<table>
+										<tr>
+										<tr height="40px">
+
+										</tr>
+											<td width="50px"></td>
+											<td>
+												<form id="exceladd_user"  method="post" enctype="multipart/form-data">
+													<input id="excel" name="excel" class="easyui-filebox" style="width:200px" data-options="buttonText:'浏览',prompt:'请选择文件...'">
+												</form>
+											</td>
+
+											<td>
+												<a  id = "booten" onclick="uploadAddexcel_user()" class="easyui-linkbutton">上传</a>
+											</td>
+										</tr>
+
+									</table>
+								</div>
+							</div>
 					</div>
 				</div>
 			</div>

@@ -49,6 +49,10 @@ public class IndexController {
         return "txtimport/txtimport.html";
     }
 
+    @RequestMapping("/importDoc")
+    public String importDoc() {
+        return "docImport/DocImport.html";
+    }
     @RequestMapping("/login")
     public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView modelAndView = new ModelAndView();

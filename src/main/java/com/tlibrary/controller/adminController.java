@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.tlibrary.model.User;
 import com.tlibrary.service.AdminService;
+import com.tlibrary.util.ExcelUtil;
 import com.tlibrary.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +32,7 @@ import java.util.Map;
 public class adminController {
 
     @Autowired
-    private importController importController;
+    private ExcelUtil excelUtil;
     @Autowired
     private AdminService as;
     @RequestMapping("/find")
@@ -60,13 +62,7 @@ public class adminController {
         user.setMajor(major);
         user.setType(type);
         String msg=as.saveAdduser(user);
-//        Map returnMap=new HashMap();
-//        returnMap.put("data",msg);
-//        Gson gson = new Gson();
-//        String json = gson.toJson(gson);
-//        //将数据发送到前端
-//        System.out.println(json);
-//        ResponseUtil.toHtml(response, json);
+
         return  msg;
     }
     @RequestMapping("/delUser")
@@ -82,7 +78,19 @@ public class adminController {
         }
 
     }
+    @RequestMapping("/downloadTemplateExcel")
+    public void downloadTemplateExcel(HttpServletRequest request, HttpServletResponse response){
 
+        List list=null;
+        String[] tableTitle = {"用户账号","姓名","密码"};
+        String[] fields={ "accountid","username","password"};
+        String tableName = "用户导入模板.xls";
+        try {
+            excelUtil.exportExcelCommon(request, response, list, tableTitle, fields, tableName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * 批量新增用户
      * @param file
@@ -90,13 +98,22 @@ public class adminController {
      */
     @RequestMapping("/addeUsers")
     public @ResponseBody
-    void addeUsers(@RequestParam(value="exceladd") MultipartFile file, HttpServletResponse response,HttpServletRequest request){
+    void addeUsers(@RequestParam(value="excel") MultipartFile file, HttpServletResponse response,HttpServletRequest request){
 
         Map map=new HashMap<>();
-
-        Gson gson = new Gson();
-        String json = gson.toJson(map);
-        ResponseUtil.toHtml(response, json);
+        String[] parameter = {"accountid","username","password"};
+        List list =null;
+        try {
+             list = excelUtil.readXls(file, parameter);
+            System.out.println(list);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+            int i =as.addeUsers(list);
+        System.out.println(i);
+//        Gson gson = new Gson();
+//        String json = gson.toJson(map);
+//        ResponseUtil.toHtml(response, json);
     }
 
 }

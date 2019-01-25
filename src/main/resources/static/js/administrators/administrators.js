@@ -5,10 +5,23 @@ $(function() {
 });
 
 function load(){
+    $("#User").css('display','none');
+    $("#manageDept").css('display','none');
+    //click事件可以自己用jquery绑定, easyui提供了选中事件
+    $('#accordionid').accordion({
+        onSelect:function(title, index)
+        {
+            if (index==0){
+                $("#User").css('display','block');
+                initDataGrid();
+            }
+        }
+    });
     $("#addUser").css('display','none');
     var w=document.getElementById("User").style.width;
     var h=document.getElementById("User").style.height;
     var inputh=parseInt(h)-106;
+
 }
 
 function add_user(){
@@ -53,6 +66,9 @@ function user_add_save(){
 function addexcel_user(){
     $("#addexcel_user").window('open');
 }
+function downloadTemplate_excel(){
+    window.location.href ='admin/downloadTemplateExcel'
+}
 
 function uploadAddexcel_user() {
     $("#exceladd_user").form({
@@ -66,8 +82,8 @@ function uploadAddexcel_user() {
             if (fileName == "") {
                 $.messager.alert('Excel批量用户导入', '请选择将要上传的文件!');
                 return false;
-            }else if(d1!=".xlsx"){
-                $.messager.alert('提示','请选择xlsx格式文件！','info');
+            }else if(d1!=".xls"){
+                $.messager.alert('提示','请选择xls格式文件！','info');
                 return false;
             }
             $("#booten").linkbutton('disable');
@@ -92,6 +108,7 @@ function uploadAddexcel_user() {
     $("#exceladd_user").form('submit');
 }
 function initDataGrid(){
+    
     $('#box').datagrid({
         width:'99.5%',
         height:408,
@@ -182,3 +199,33 @@ function deluser(){
 
 }
 
+function deptMag(){
+    load();
+    $("#manageDept").css('display','block');
+    datagriddept();
+}
+
+function datagriddept() {
+    $('#boxDept').datagrid({
+        width:'99.5%',
+        height:408,
+        remoteSort:false,
+        iconCls : 'icon-search',
+        columns : [[
+            {
+                field : 'deptid',
+                title : '编号',
+                checkbox : true
+            },
+            {
+                field : 'dept',
+                title : '名称',
+                sortable:true,
+                formatter:dwxx_formatter
+            }
+
+        ]],
+        rownumbers:true,
+        pagination:true,
+    });
+}

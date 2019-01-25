@@ -57,4 +57,18 @@ public class AdminService {
         }
         return msg;
     }
+
+    public int addeUsers(List list) {
+        int msg=0;
+        for (int i = 0; i <list.size() ; i++) {
+            Map<String,String> map= (Map<String, String>) list.get(i);
+            User user=new User();
+            user.setId(UUID.randomUUID().toString());
+            user.setAccountid(map.get("accountid"));
+            user.setPassword(map.get("password"));
+            user.setUsername(map.get("username"));
+             msg += userMapper.insertSelective(user);
+        }
+        return  msg;
+    }
 }

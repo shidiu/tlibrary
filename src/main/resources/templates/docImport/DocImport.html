@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>文本导入</title>
+    <title>word导入</title>
     <title></title>
     <link rel="stylesheet" type="text/css" href="../js/easyui/themes/gray/easyui.css">
     <link rel="stylesheet" type="text/css" href="../js/easyui/themes/icon.css">
@@ -11,7 +11,7 @@
     <script type="text/javascript" src="../js/easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="../js//esayui/locale/easyui-lang-zh_CN.js"></script>
 
-    <script type="text/javascript" src="../js/txtimport/txtimport.js"></script>
+    <script type="text/javascript" src="../js/Docimport/Docimport.js"></script>
 
 </head>
 <body>
@@ -21,14 +21,14 @@
     <table>
         <tr>
             <td>
-    <form id="uploadTxt"  method="post" enctype="multipart/form-data">
-    <input id="txt" name="txt" type="text" style="width:300px">
-    </form>
+                <form id="uploadDoc"  method="post" enctype="multipart/form-data">
+                    <input id="doc" name="doc" type="text" style="width:300px">
+                </form>
             </td>
         </tr>
         <tr>
             <td>
-            <a  id = "booten" onclick="uploadTxt()" class="easyui-linkbutton">上传</a>
+                <a  id = "booten" onclick="uploadDoc()" class="easyui-linkbutton">上传</a>
             </td>
         </tr>
     </table>
